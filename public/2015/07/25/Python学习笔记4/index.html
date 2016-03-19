@@ -1,0 +1,1122 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="BCxS4BjJYARXVYW3XUNGoFXtHimMMOMHzchkfIWFhS4" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,学习,笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/smile_Doraemon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="目录
+错误、测试和调试1.1 错误处理1.2 调试1.3 单元测试
+IO编程2.1 文件读写2.2 操作文件和目录2.3 序列化
+
+
+1. 错误、测试和调试 1.1 错误处理 Python中内置和许多高级语言一样的try…except…finally…的错误处理机制，下面我们就通过一个例子来看看Python中的错误处理机制:123456789try:	print &apos;try...&apos;	r = 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 学习笔记（4）">
+<meta property="og:url" content="http://woshijpf.github.io/2015/07/25/Python学习笔记4/index.html">
+<meta property="og:site_name" content="woshijpf's blog">
+<meta property="og:description" content="目录
+错误、测试和调试1.1 错误处理1.2 调试1.3 单元测试
+IO编程2.1 文件读写2.2 操作文件和目录2.3 序列化
+
+
+1. 错误、测试和调试 1.1 错误处理 Python中内置和许多高级语言一样的try…except…finally…的错误处理机制，下面我们就通过一个例子来看看Python中的错误处理机制:123456789try:	print &apos;try...&apos;	r = 10">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/python_logo.png">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/test_txt.png">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/test_txt2.png">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/test_txt3.png">
+<meta property="og:updated_time" content="2016-03-10T14:52:18.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 学习笔记（4）">
+<meta name="twitter:description" content="目录
+错误、测试和调试1.1 错误处理1.2 调试1.3 单元测试
+IO编程2.1 文件读写2.2 操作文件和目录2.3 序列化
+
+
+1. 错误、测试和调试 1.1 错误处理 Python中内置和许多高级语言一样的try…except…finally…的错误处理机制，下面我们就通过一个例子来看看Python中的错误处理机制:123456789try:	print &apos;try...&apos;	r = 10">
+<meta name="twitter:image" content="http://7xj51c.com1.z0.glb.clouddn.com/python_logo.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Python 学习笔记（4） | woshijpf's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63075912-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?918348754b933e7ef9176e5e0720b4f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">woshijpf's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'TG4h5bcA6H_tjQY9KK_w','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python 学习笔记（4）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-25T19:04:23+08:00" content="2015-07-25">
+              2015-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/25/Python学习笔记4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/25/Python学习笔记4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xj51c.com1.z0.glb.clouddn.com/python_logo.png" alt="python_logo"></p>
+<blockquote>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ol>
+<li><a href="#1">错误、测试和调试</a><br>1.1 <a href="#1.1">错误处理</a><br>1.2 <a href="#1.2">调试</a><br>1.3 <a href="#1.3">单元测试</a></li>
+<li><a href="#2">IO编程</a><br>2.1 <a href="#2.1">文件读写</a><br>2.2 <a href="#2.2">操作文件和目录</a><br>2.3 <a href="#2.3">序列化</a></li>
+</ol>
+</blockquote>
+<h2 id="1-错误、测试和调试"><a href="#1-错误、测试和调试" class="headerlink" title="1. 错误、测试和调试 "></a>1. 错误、测试和调试 <span id="1"></span></h2><h3 id="1-1-错误处理"><a href="#1-1-错误处理" class="headerlink" title="1.1 错误处理 "></a>1.1 错误处理 <span id="1.1"></span></h3><p>Python中内置和许多高级语言一样的try…except…finally…的错误处理机制，下面我们就通过一个例子来看看Python中的错误处理机制:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'try...'</span></span><br><span class="line">	r = <span class="number">10</span>/<span class="number">0</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">'result'</span>,r</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError,e:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'except:'</span>,e</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'finally...'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'END'</span></span><br></pre></td></tr></table></figure></p>
+<p>当我们认为某些代码可能会出错时，就可以用try来运行这段代码，如果执行出错，则后续代码不会继续执行，而是直接跳转到错误处理代码，即except语句块，执行完except之后，如果有finally语句块，则执行finally语句块，至此，执行完毕。</p>
+<a id="more"></a>
+<p>上面的代码中在计算10/0时会产生一个除法运算错误:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>...</span><br><span class="line"><span class="keyword">except</span>: integer division <span class="keyword">or</span> modulo by zero</span><br><span class="line"><span class="keyword">finally</span>...</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>从输出的结果我们可知，当发生错误时，后续的语句<strong>print ‘result’,r</strong>就不再被执行，except由于捕获到<strong>ZeroDivisionError</strong>，因此被执行。最后，finally语句块被执行，然后，程序继续按照流程接下去执行。</p>
+<p>我们有时很好奇为什么try…except…finally…语句块中，为什么还要有finally语句块，这不是可有可无的吗？</p>
+<p>的确finally语句块有时在程序里的确不起什么作用，例如上面的例子中我们的finally语句块中就打印了一个“finally”的提示信息，并没有什么特殊作用。但是，但是，当我们遇到某些情况时，例如，我们对一个文件进行写操作，但是程序在try语句块中出现了错误，抛出了错误，但是呢，这个错误并没有被except语句块捕捉到，这时，我们就可以在finally语句块中，写上关闭文件的代码，以便其他程序还能对该文件进行读写操作，所以这就是finally语句块的作用。它通常是用来关闭一些文件和数据库连接，或者是释放网络连接等。</p>
+<p>此外，如果没有错误发生，我们可以在except语句块之后加上一个else，当没有错误发生时，就会自动执行else语句:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'try...'</span></span><br><span class="line">    r = <span class="number">10</span> / int(<span class="string">'a'</span>)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'result:'</span>, r</span><br><span class="line"><span class="keyword">except</span> ValueError, e:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'ValueError:'</span>, e</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError, e:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'ZeroDivisionError:'</span>, e</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'no error!'</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'finally...'</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'END'</span></span><br></pre></td></tr></table></figure></p>
+<p>Python的错误其实也是类(class)，所有的错误类型都继承自<strong>BaseException</strong>，所以在使用except时需要注意的是，它不但捕获该类型的错误，还把其子类也“一网打尽”，例如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	foo()</span><br><span class="line"><span class="keyword">except</span> StandardError,e:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'StandardError'</span></span><br><span class="line"><span class="keyword">except</span> ValueError,e:</span><br><span class="line">	<span class="keyword">print</span> <span class="string">'ValueError'</span></span><br></pre></td></tr></table></figure></p>
+<p>第二个except永远也捕获不到ValueError，因为ValueError是StandardError的子类，如果有错误产生，就会被第一个except捕获到。</p>
+<p>Python中所有的错误都是从BaseException类派生而来，常见的错误类型和继承关系，请点击下面的链接查看<a href="https://docs.python.org/2/library/exceptions.html#exception-hierarchy" target="_blank" rel="external">https://docs.python.org/2/library/exceptions.html#exception-hierarchy</a></p>
+<h4 id="调用堆栈"><a href="#调用堆栈" class="headerlink" title="调用堆栈"></a>调用堆栈</h4><p>如果错误没有被捕获，他就回一直向上抛，最后被Python解释器捕获，打印一个错误信息，然后程序退出，下面我们就以一个例子为例:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(s)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">10</span>/int(s)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bas</span><span class="params">(s)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> foo(s)*<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	bas(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
+<p>执行的结果如下所示:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"err.py"</span>, line <span class="number">10</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"err.py"</span>, line <span class="number">8</span>, <span class="keyword">in</span> main</span><br><span class="line">    bas(<span class="string">'0'</span>)</span><br><span class="line">  File <span class="string">"err.py"</span>, line <span class="number">5</span>, <span class="keyword">in</span> bas</span><br><span class="line">    <span class="keyword">return</span> foo(s)*<span class="number">2</span></span><br><span class="line">  File <span class="string">"err.py"</span>, line <span class="number">2</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>/int(s)</span><br><span class="line">ZeroDivisionError: integer division <span class="keyword">or</span> modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>从上面的运行结果我们可以看出，当我们的程序出错时，Python解释器会打印出整个错误的调用函数链:</p>
+<blockquote>
+<p>main()  –&gt;  bas() –&gt;  foo()  –&gt;  最后到出错的源头</p>
+</blockquote>
+<h4 id="抛出错误"><a href="#抛出错误" class="headerlink" title="抛出错误"></a>抛出错误</h4><p>因为错误是一个class，捕获一个错误就是捕获到了该class的一个实例。因此，错误并不是凭空产生的，而是有意创建并被抛出的。Python的内置函数会抛出很多类型的错误，而我们自己定义的函数也可以抛出错误。</p>
+<p>我们可以抛出两种错误，一种是自己自定义的错误类，另一种是Python内置的错误类型，例如:ValueError、ZeroDivisionError等。</p>
+<p>Python中抛出错误采用的是<strong>raise</strong>关键字，例如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooError</span><span class="params">(StandardError)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(s)</span>:</span></span><br><span class="line">	n = int(s)</span><br><span class="line">	<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">raise</span> FooError(<span class="string">'invalid value:%s'</span> % s)</span><br><span class="line">	<span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line"></span><br><span class="line">foo(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>执行完上面的代码之后，我们就可以得到这样的错误提示信息:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"raise_err.py"</span>, line <span class="number">10</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    foo(<span class="number">0</span>)</span><br><span class="line">  File <span class="string">"raise_err.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">raise</span> FooError(<span class="string">'invalid value:%s'</span> % s)</span><br><span class="line">__main__.FooError: invalid value:<span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>最后，我们再来看一种错误的处理方式:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(s)</span>:</span></span><br><span class="line">	n = int(s)</span><br><span class="line">	<span class="keyword">return</span> <span class="number">10</span>/n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(s)</span>:</span></span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		<span class="keyword">return</span> foo(s)*<span class="number">2</span></span><br><span class="line">	<span class="keyword">except</span> StandardError,e:</span><br><span class="line">		<span class="keyword">print</span> <span class="string">'Error'</span></span><br><span class="line">		<span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	bar(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
+<p>上面代码的执行结果是:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Error</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"err2.py"</span>, line <span class="number">15</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"err2.py"</span>, line <span class="number">13</span>, <span class="keyword">in</span> main</span><br><span class="line">    bar(<span class="string">'0'</span>)</span><br><span class="line">  File <span class="string">"err2.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> bar</span><br><span class="line">    <span class="keyword">return</span> foo(s)*<span class="number">2</span></span><br><span class="line">  File <span class="string">"err2.py"</span>, line <span class="number">3</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>/n</span><br><span class="line">ZeroDivisionError: integer division <span class="keyword">or</span> modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>在bar()函数中，我们明明已经捕获了错误，但是打印一个Error后，又把错误通过raise语句抛出去了，这是为什么呢？</p>
+<p>其实这种错误的处理方式不但没有错，还非常常见。在bar中捕获错误，其实本质上只是记录一下，便于后面进行跟踪。但是由于当前函数并不知道怎么处理该错误，所以，最恰当的方式就是将错误继续向上抛出，让顶层的调用者去处理。</p>
+<h3 id="1-2-调试"><a href="#1-2-调试" class="headerlink" title="1.2 调试 "></a>1.2 调试 <span id="1.2"></span></h3><p>程序写完并且能够一次运行通过的概率很小，总是会存在着各种各样的bug需要我们去修正，这样的一个过程就叫做调试。调试的方法有很多种，下面就依次来介绍下各种调试的方法。</p>
+<h4 id="使用print输出关键变量"><a href="#使用print输出关键变量" class="headerlink" title="使用print输出关键变量"></a>使用print输出关键变量</h4><p>这种方法非常简单粗暴，就是使用print语句输出有关关键变量的有关信息，例如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># err.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(s)</span>:</span></span><br><span class="line">    n = int(s)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'&gt;&gt;&gt; n = %d'</span> % n</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    foo(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
+<p>执行后在输出中查找打印的变量值:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>n = <span class="number">0</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"debug1.py"</span>, line <span class="number">9</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"debug1.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> main</span><br><span class="line">    foo(<span class="string">'0'</span>)</span><br><span class="line">  File <span class="string">"debug1.py"</span>, line <span class="number">4</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line">ZeroDivisionError: integer division <span class="keyword">or</span> modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>但是，使用print最大的坏处就是你将来还得将print语句删除掉，想想程序里到处都是print，运行结果也会包含很多的垃圾信息。</p>
+<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><p>凡是用print来辅助查看的地方，都可以使用断言<strong>assert</strong>来代替:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(s)</span>:</span></span><br><span class="line">    n = int(s)</span><br><span class="line">    <span class="keyword">assert</span> n!=<span class="number">0</span>,<span class="string">'n is zero!'</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    foo(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></p>
+<p>assert的意思是断言（按照我自己的理解来讲就是预言，预测的意思，它可以根据断言后面的表达式来判断后续的代码是否会出错），在本例子中，表达式n!=0应该是True，否则后面的代码就要出错。如果断言失败，assert语句就会抛出AssertError:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">9</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> main</span><br><span class="line">    foo(<span class="string">'0'</span>)</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">3</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">assert</span> n!=<span class="number">0</span>,<span class="string">'n is zero!'</span></span><br><span class="line">AssertionError: n <span class="keyword">is</span> zero!</span><br></pre></td></tr></table></figure></p>
+<p>如果程序中也到处充斥着assert，和print相比也好不到那里去，但是可以通过运行py文件时带上参数<strong>-O</strong>来关闭断言功能:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ python -O debug2.py </span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">9</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> main</span><br><span class="line">    foo(<span class="string">'0'</span>)</span><br><span class="line">  File <span class="string">"debug2.py"</span>, line <span class="number">4</span>, <span class="keyword">in</span> foo</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line">ZeroDivisionError: integer division <span class="keyword">or</span> modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>关闭断言功能后，你可以把程序中所有的assert语句当做pass语句来看。</p>
+<h4 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h4><p>把print替换为logging是第三种方式，和assert相比，logging不会抛出错误，而且可以输出到文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.basicConfig(level=logging.INFO)</span><br><span class="line"></span><br><span class="line">s=<span class="string">'0'</span></span><br><span class="line">n = int(s)</span><br><span class="line">logging.info(<span class="string">'n = %d'</span> % n)</span><br><span class="line"><span class="keyword">print</span> <span class="number">10</span>/n</span><br></pre></td></tr></table></figure></p>
+<p>运行之后，我们可以看到下面的结果:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO:root:n = <span class="number">0</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"debug3.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="keyword">print</span> <span class="number">10</span>/n</span><br><span class="line">ZeroDivisionError: integer division <span class="keyword">or</span> modulo by zero</span><br></pre></td></tr></table></figure></p>
+<p>这就是logging的好处，它允许你指定记录信息的级别，有debug,info,warning,error等几个级别，当我们指定level=INFO时，logging.debug就不起作用了。同理，指定level=WARNING后，debug和info就不起作用了。这样一来，你可以放心地输出不同级别的信息，也不用删除，最后统一控制输出哪个级别的信息。</p>
+<p>logging还有一个好处就是通过简单的配置，一条语句可以同时输出到不同的地方，比如console和文件。</p>
+<h4 id="pdb"><a href="#pdb" class="headerlink" title="pdb"></a>pdb</h4><p>第四种方式就是Python解释器自带的pdb调试器，它可以让程序一步一步执行，并可以随时查看运行状态。我们先准备好程序:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">'0'</span></span><br><span class="line">n = int(s)</span><br><span class="line"><span class="keyword">print</span> <span class="number">10</span>/n</span><br></pre></td></tr></table></figure></p>
+<p>然后启动pdb调试器:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m pdb debug4.py</span><br><span class="line">&gt; /home/woshijpf/Nutstore/学习/Python学习/Python_Code/Exception_Processing/debug4.py(1)&lt;module&gt;()</span><br><span class="line">-&gt; s='0'</span><br></pre></td></tr></table></figure></p>
+<p>以参数<strong>-m pdb</strong>启动后，pdb定位到下一步要执行的代码”-&gt; s = ‘0’”。输入命令<strong>l</strong>来查看代码:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(Pdb) l</span><br><span class="line">  1  -&gt;	s='0'</span><br><span class="line">  2  	n = int(s)</span><br><span class="line">  3  	print 10/n</span><br><span class="line">[EOF]</span><br></pre></td></tr></table></figure></p>
+<p>输入命令<strong>n</strong>可以单步执行代码:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(Pdb) n</span><br><span class="line">&gt; /home/woshijpf/Nutstore/学习/Python学习/Python_Code/Exception_Processing/debug4.py(2)&lt;module&gt;()</span><br><span class="line">-&gt; n = int(s)</span><br><span class="line">(Pdb) n</span><br><span class="line">&gt; /home/woshijpf/Nutstore/学习/Python学习/Python_Code/Exception_Processing/debug4.py(3)&lt;module&gt;()</span><br><span class="line">-&gt; print 10/n</span><br></pre></td></tr></table></figure></p>
+<p>并且，在任何时候都可以输入命令<strong>p 变量名</strong>来查看变量:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(Pdb) p s</span><br><span class="line"><span class="string">'0'</span></span><br><span class="line">(Pdb) p n</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>输入命令<strong>*q</strong>可以结束调试，退出程序:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Pdb) q</span><br></pre></td></tr></table></figure></p>
+<p>这种通过pdb在命令行调试的方法理论上是万能的，但实在是太麻烦了，如果有一千行代码，要运行到第999行得敲多少命令啊。还好，我们还有另一种调试方法。</p>
+<h4 id="pdb-set-trace-设置断点"><a href="#pdb-set-trace-设置断点" class="headerlink" title="pdb.set_trace()设置断点"></a>pdb.set_trace()设置断点</h4><p>这种方法也是使用pdb，但是不需要单步执行，我们只需要import pdb，然后，在可能出错的地方放一个pdb.set_trace()，就可以设置一个断点:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdb</span><br><span class="line"></span><br><span class="line">s=<span class="string">'0'</span></span><br><span class="line">n = int(s)</span><br><span class="line">pdb.set_trace()  <span class="comment">#程序运行到这行就会自动暂停</span></span><br><span class="line"><span class="keyword">print</span> <span class="number">10</span>/n</span><br></pre></td></tr></table></figure></p>
+<p>运行代码，程序会自动在pdb.set_trace()处暂停，并进入pdb调试环境，可以用命令p查看变量，或者用命令c继续运行:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python debug5.py </span><br><span class="line">&gt; /home/woshijpf/Nutstore/学习/Python学习/Python_Code/Exception_Processing/debug5.py(6)&lt;module&gt;()</span><br><span class="line">-&gt; print 10/n</span><br><span class="line">(Pdb) n</span><br><span class="line">ZeroDivisionError: 'integer division or modulo by zero'</span><br></pre></td></tr></table></figure></p>
+<h4 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h4><p>如果想非常简单直接地设置断点和单步执行，这时一个支持调试功能的IDE就非常强大，目前python中比较好用的IDE是Pycharm。</p>
+<h3 id="1-3-单元测试"><a href="#1-3-单元测试" class="headerlink" title="1.3 单元测试 "></a>1.3 单元测试 <span id="1.3"></span></h3><p>单元测试是用来对一个模块、一个函数或者一个类进行正确性检验的测试工作。</p>
+<p>下面我们就编写一个Dict类，这个类的行为和dict一致，但是可以通过属性来访问，用起来就像下面这样:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = Dict(a=<span class="number">1</span>, b=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d[<span class="string">'a'</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.a</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>mydict.py的代码如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dict</span><span class="params">(dict)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,**kw)</span>:</span></span><br><span class="line">		super(Dict,self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self,key)</span>:</span></span><br><span class="line">		<span class="keyword">try</span>:</span><br><span class="line">			<span class="keyword">return</span> self[key]</span><br><span class="line">		<span class="keyword">except</span> KeyError:</span><br><span class="line">			<span class="keyword">raise</span> AttributeError(<span class="string">r"Dict object has no attribute %s"</span> % key)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self,key,value)</span>:</span></span><br><span class="line">		self[key] = value</span><br></pre></td></tr></table></figure></p>
+<p>为了编写测试单元，我们需要引入Python自带的unittest模块，编写mydict_test.py文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mydict <span class="keyword">import</span> Dict</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_init</span><span class="params">(self)</span>:</span></span><br><span class="line">		d = Dict(a=<span class="number">1</span>,b=<span class="string">'test'</span>)</span><br><span class="line">		self.assertEquals(d.a,<span class="number">1</span>)</span><br><span class="line">		self.assertEquals(d.b,<span class="string">'test'</span>)</span><br><span class="line">		self.assertTrue(isinstance(d,dict))</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_key</span><span class="params">(self)</span>:</span></span><br><span class="line">		d = Dict()</span><br><span class="line">		d[<span class="string">'key'</span>] = <span class="string">'value'</span></span><br><span class="line">		self.assertEquals(d.key,<span class="string">'value'</span>)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_attr</span><span class="params">(self)</span>:</span></span><br><span class="line">		d = Dict()</span><br><span class="line">		d.key = <span class="string">'value'</span></span><br><span class="line">		d.assertTrue(<span class="string">'key'</span> <span class="keyword">in</span> d)</span><br><span class="line">		d.assertEquals(d[<span class="string">'key'</span>],<span class="string">'value'</span>)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_keyerror</span><span class="params">(self)</span>:</span></span><br><span class="line">		d = Dict()</span><br><span class="line">		<span class="keyword">with</span> self.assertRaise(KeyError):</span><br><span class="line">			value = d[<span class="string">'empty'</span>]</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">test_attrerror</span><span class="params">(self)</span>:</span></span><br><span class="line">		d = Dict()</span><br><span class="line">		<span class="keyword">with</span> self.assertRaise(AttributeError):</span><br><span class="line">			value = d.empty</span><br></pre></td></tr></table></figure></p>
+<p>编写单元测试时，我们需要编写一个测试类，从unittest.TestCase继承。</p>
+<p><strong>以test开头的方法就是测试方法，不易test开头的方法不被认为是测试方法，测试的时候不会被执行。</strong></p>
+<p>对每一类测试都需要编写一个test_xxx()的方法。由于unittest.TestCase类内置许多条件判断，我们只需要调用这些方法就可以断言输出是否是我们所期望的，我们最常用的断言就是assertEquals:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.assertEquals(abs(<span class="number">-1</span>),<span class="number">1</span>)   <span class="comment">#断言 函数返回的结果与1相等</span></span><br></pre></td></tr></table></figure></p>
+<p>另一种重要的断言就是期待抛出指定类型的Error，比如通过d[‘empty’]访问不存在的key时，断言会抛出KeyError:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> self.assertRaise(KeyError):</span><br><span class="line">	vlaue = d[<span class="string">'empty'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>而通过d.empty访问不存在的key时，我们期待抛出AttributeError:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> self.assertRaise(AttributeError):</span><br><span class="line">	value = d.empty</span><br></pre></td></tr></table></figure></p>
+<h4 id="运行单元测试"><a href="#运行单元测试" class="headerlink" title="运行单元测试"></a>运行单元测试</h4><p>最简单的运行单元测试的方法，就是在我们所编写的测试类文件的末尾加上下面两句代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	unittest.main()</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以把mydict_test.py当做普通的python脚本运行:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python mydict_test.py</span><br></pre></td></tr></table></figure></p>
+<p>另一种更加常见的方法是在命令行，通过参数-m unittest直接运行单元测试:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python -m unittest mydict_test.py</span><br></pre></td></tr></table></figure></p>
+<p>这是推荐的做法，因为这样可以同时一次批量运行很多的单元测试，并且，有很多工具可以自动来运行这些单元测试。</p>
+<p>运行得到的结果为:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">======================================================================</span><br><span class="line">ERROR: test_attr (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">20</span>, <span class="keyword">in</span> test_attr</span><br><span class="line">    d.assertTrue(<span class="string">'key'</span> <span class="keyword">in</span> d)</span><br><span class="line">  File <span class="string">"mydict.py"</span>, line <span class="number">9</span>, <span class="keyword">in</span> __getattr__</span><br><span class="line">    <span class="keyword">raise</span> AttributeError(<span class="string">r"Dict object has no attribute %s"</span> % key)</span><br><span class="line">AttributeError: Dict object has no attribute assertTrue</span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">ERROR: test_attrerror (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">30</span>, <span class="keyword">in</span> test_attrerror</span><br><span class="line">    <span class="keyword">with</span> self.assertRaise(AttributeError):</span><br><span class="line">AttributeError: <span class="string">'TestDict'</span> object has no attribute <span class="string">'assertRaise'</span></span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">ERROR: test_keyerror (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">25</span>, <span class="keyword">in</span> test_keyerror</span><br><span class="line">    <span class="keyword">with</span> self.assertRaise(KeyError):</span><br><span class="line">AttributeError: <span class="string">'TestDict'</span> object has no attribute <span class="string">'assertRaise'</span></span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran <span class="number">5</span> tests <span class="keyword">in</span> <span class="number">0.000</span>s</span><br><span class="line"></span><br><span class="line">FAILED (errors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="setUp和tearDown"><a href="#setUp和tearDown" class="headerlink" title="setUp和tearDown()"></a>setUp和tearDown()</h4><p>可以子啊单元测试中编写两个特殊的函数setUp()和tearDown()。这两个方法会分别在调用每一个测试方法的前后分别被执行。</p>
+<p>setUp()和tearDown()方法有什么用呢？设想你的测试需要启动一个数据库，这时，就可以在setUp()方法中连接数据库，在tearDown()方法中关闭数据库，这样，不必在每个测试方法中重复相同的代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(self)</span>:</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">'setUp...'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tearDown</span><span class="params">(self)</span>:</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">'tearDown...'</span></span><br></pre></td></tr></table></figure></p>
+<p>可以再次运行测试，看看每个测试方法调用前是否会打印处setUp…和tearDown…。<br>再次运行的结果为:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">setUp...</span><br><span class="line">EtearDown...</span><br><span class="line">setUp...</span><br><span class="line">EtearDown...</span><br><span class="line">setUp...</span><br><span class="line">tearDown...</span><br><span class="line">.setUp...</span><br><span class="line">tearDown...</span><br><span class="line">.setUp...</span><br><span class="line">EtearDown...</span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">ERROR: test_attr (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">20</span>, <span class="keyword">in</span> test_attr</span><br><span class="line">    d.assertTrue(<span class="string">'key'</span> <span class="keyword">in</span> d)</span><br><span class="line">  File <span class="string">"mydict.py"</span>, line <span class="number">9</span>, <span class="keyword">in</span> __getattr__</span><br><span class="line">    <span class="keyword">raise</span> AttributeError(<span class="string">r"Dict object has no attribute %s"</span> % key)</span><br><span class="line">AttributeError: Dict object has no attribute assertTrue</span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">ERROR: test_attrerror (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">30</span>, <span class="keyword">in</span> test_attrerror</span><br><span class="line">    <span class="keyword">with</span> self.assertRaise(AttributeError):</span><br><span class="line">AttributeError: <span class="string">'TestDict'</span> object has no attribute <span class="string">'assertRaise'</span></span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">ERROR: test_keyerror (mydict_test.TestDict)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"mydict_test.py"</span>, line <span class="number">25</span>, <span class="keyword">in</span> test_keyerror</span><br><span class="line">    <span class="keyword">with</span> self.assertRaise(KeyError):</span><br><span class="line">AttributeError: <span class="string">'TestDict'</span> object has no attribute <span class="string">'assertRaise'</span></span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran <span class="number">5</span> tests <span class="keyword">in</span> <span class="number">0.001</span>s</span><br><span class="line"></span><br><span class="line">FAILED (errors=<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p>总结一些单元测试:</p>
+<ol>
+<li>单元测试可以有效地测试某个程序模块的行为，是未来重构代码的信心保证。</li>
+<li>单元测试的测试用例要覆盖常用的输入组合、边界条件和异常。</li>
+<li>单元测试代码要非常简单，如果测试代码太复杂，那么测试代码本身就可能有bug。</li>
+<li>单元测试通过了并不意味着程序就没有bug了，但是不通过程序肯定有bug。</li>
+</ol>
+<h2 id="2-IO编程"><a href="#2-IO编程" class="headerlink" title="2. IO编程 "></a>2. IO编程 <span id="2"></span></h2><p>IO编程中，Stream（流）是一个非常重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存留到外面去。</p>
+<p>由于CPU和内存的速度原原高于外设的速度，所以在IO编程中，就会存在着严重的速度不匹配的问题。举个例子来说，比如要把100M的数据写入到磁盘中，CPU输出100M的数据只需要0.01秒，可是磁盘接收这100M数据可能需要10秒，怎么办呢？下面就有两种解决方案:<br>第一种是让CPU等着，也就是程序暂停执行后续的代码，等待100M数据在10s后写入磁盘，再接着往下执行，这种模式称为同步IO。</p>
+<p>第二种是不让CPU等待，只是告诉磁盘，“您老慢慢写，不着急，我接着干别的事情去了”，于是，后续的代码就会继续执行，这种模式称为异步IO。</p>
+<p>同步IO和异步IO的最重要的区别就是: 是否等待IO执行的结果。在本章中介绍的是同步IO，有关异步IO会在以后分析时，进行介绍。</p>
+<h3 id="2-1-文件读写"><a href="#2-1-文件读写" class="headerlink" title="2.1 文件读写 "></a>2.1 文件读写 <span id="2.1"></span></h3><p>读写文件是最常见的IO操作，Python内置了读写文件的函数，用法和C是兼容的。</p>
+<p>####读文件<br>要以读文件的模式打开一个文件对象，使用Python内置的open()函数，传入文件名和标示符:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'hello.txt'</span>,<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>其中标示符”r”表示读，这样，我们就成功地打开文件了。</p>
+<p>文件打开成功后，我们就可以通过read()函数一次性读取文件中的全部内容，Python把文件中的内容读取到内存，并用一个str对象表示:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.read()</span><br><span class="line"><span class="string">'Hello World!\n'</span></span><br></pre></td></tr></table></figure></p>
+<p>完成文件读取操作之后，我们还要记得关闭文件，Python中采用close()函数来关闭打开的文件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.close()</span><br></pre></td></tr></table></figure></p>
+<p>由于文件在读写时都有可能会产生IOError，一旦出错，后面的f.close()就不会被调用了。所以，为了保证无论是否出错都能正确关闭文件，我们可以使用try…finally…来实现:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	f = open(<span class="string">'/path/to/file'</span>,<span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">print</span> f.read()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	<span class="keyword">if</span> f:</span><br><span class="line">    	f.close()</span><br></pre></td></tr></table></figure></p>
+<p>但是，如果每次都这么写，那也实在是太繁琐了，所以，Python中引入了with语句来帮助我们调用close()方法:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'path/to/file'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">	<span class="keyword">print</span> f.read()</span><br></pre></td></tr></table></figure></p>
+<p>这和前面的try…finally…的效果是一样的，但是代码更加简洁，并且不用调用f.close()方法。</p>
+<p>读取文件有以下几个方法，大家可以根据具体情况，具体要求来选择合适的方法:</p>
+<table>
+<thead>
+<tr>
+<th>文件读取方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read()</td>
+<td>一次性读取文件的全部内容</td>
+</tr>
+<tr>
+<td>read(size)</td>
+<td>每次最多读取size个字节的内容</td>
+</tr>
+<tr>
+<td>readline()</td>
+<td>每次读取一行内容</td>
+</tr>
+<tr>
+<td>readlines()</td>
+<td>一次性读取所有内容并按行返回list</td>
+</tr>
+</tbody>
+</table>
+<p>如果文件很小，read()一次性读取最方便；如果不能够确定大小，反复调用read(size)最为保险；如果是配置文件，调用readlines()，最为方便。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">	print(line.strip())   <span class="comment">#把每行末尾的换行符‘\n’都去掉</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="file-like-Object"><a href="#file-like-Object" class="headerlink" title="file-like Object"></a>file-like Object</h4><p>向open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object。除了file之外，还可以是内存的字节流、网络流、自定义流等等。file-like Object不要求从某个类继承，只要写个read()方法就可以了。</p>
+<p>StringIO就是在内存中创建的file-like Object，常用作临时缓冲区。</p>
+<h4 id="二进制文件"><a href="#二进制文件" class="headerlink" title="二进制文件"></a>二进制文件</h4><p>前面讲的默认都是读取文本文件，并且是ASCII编码的文本文件。要读取二进制文件，比如图片、视频等等，用’rb’模式打开文件即可:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'test.jpg'</span>,<span class="string">'rb'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.read()</span><br><span class="line"><span class="string">'\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...'</span> <span class="comment"># 十六进制表示的字节</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>如果想要读取非ASCII编码的文本文件，就必须以二进制模式打开，再解码。比如utf-8编码的文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'hello.txt'</span>,<span class="string">'rb'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>u = f.read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>u</span><br><span class="line"><span class="string">u'Hello World!\n\u4f60\u597d\uff0c\u4e16\u754c\uff01\n'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> u</span><br><span class="line">Hello World!</span><br><span class="line">你好，世界！</span><br></pre></td></tr></table></figure></p>
+<p>如果每次都这么手动转换编码嫌麻烦（写程序怕麻烦是好事，不怕麻烦就会写出又长又难懂又没法维护的代码），Python还提供了一个codecs模块帮我们在读文件时自动转换编码，直接读出unicode:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> codecs</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> codecs.open(<span class="string">'hello.txt'</span>,<span class="string">'r'</span>,<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    u = f.read()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> u</span><br><span class="line"><span class="meta">... </span></span><br><span class="line">Hello World!</span><br><span class="line">你好，世界！</span><br></pre></td></tr></table></figure></p>
+<h4 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h4><p>写文件和读文件是一样的，唯一的区别就是调用open()函数时，传入标识符‘w’和‘wb’表示写文本文件或者写二进制文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'test.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">'Hello World!'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>然后你就可以打开test.txt文件，看看是否写入了‘Hello World!’。<br><img src="http://7xj51c.com1.z0.glb.clouddn.com/test_txt.png" alt="test_txt"></p>
+<p>如果我们想向文件写入中文怎么办呢？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'test.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">'你好，世界！'</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>这种方法写入的中文采用的是utf-8编码</strong></p>
+<p>如果我们想写入指定编码的文本到文件中，可以模仿codecs的例子来进行写入，例如现在我们想写入一个GBK编码格式的文本，我们可以这样写入:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> codecs.open(<span class="string">'test.txt'</span>,<span class="string">'w'</span>,<span class="string">'gbk'</span>) <span class="keyword">as</span> f:</span><br><span class="line"><span class="meta">... </span>    f.write(<span class="string">u'你好，世界！'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>写完之后，我们打开文本文件，我们看到的是这样的:<br><img src="http://7xj51c.com1.z0.glb.clouddn.com/test_txt2.png" alt="test_txt2"></p>
+<p>而当我们选择GBK编码格式时，结果是这样的:<br><img src="http://7xj51c.com1.z0.glb.clouddn.com/test_txt3.png" alt="test_txt3"></p>
+<p>在这里还要注意一点，请注意我们写入的语句:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">u'你好，世界！'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这里为什么要用unicode编码呢，我如果直接这样写呢:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">'你好，世界！'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果是这种方式，写入带有中文的字符串就会抛出下面这样的错误:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">2</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"/usr/lib/python2.7/codecs.py"</span>, line <span class="number">688</span>, <span class="keyword">in</span> write</span><br><span class="line">    <span class="keyword">return</span> self.writer.write(data)</span><br><span class="line">UnicodeDecodeError: <span class="string">'ascii'</span> codec can<span class="string">'t decode byte 0xe4 in position 0: ordinal not in range(128)</span></span><br></pre></td></tr></table></figure></p>
+<p>根据提示，错误的原因就是我们想写入的字符串‘你好，世界！’无法用ASCII码进行编码，所以需要写成unicode的形式。</p>
+<p>有关Python中的打开文件open()函数的标示符的详细介绍请点击下面的链接:<a href="https://docs.python.org/2/library/io.html?highlight=open#io.open" target="_blank" rel="external">https://docs.python.org/2/library/io.html?highlight=open#io.open</a></p>
+<h3 id="2-2-操作文件和目录"><a href="#2-2-操作文件和目录" class="headerlink" title="2.2 操作文件和目录 "></a>2.2 操作文件和目录 <span id="2.2"></span></h3><p>在Python中如果想执行目录和文件的操作，可以使用Python内置的<strong>os</strong>模块或者直接调用操作系统的相关接口函数。</p>
+<p>下面我们就打开Python交互式命令行，来看看如何使用os模块的基本功能:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.name</span><br><span class="line"><span class="string">'posix'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果是posix，说明系统是Linux、Unix或Mac OS X，如果是nt，就是Windows系统。</p>
+<p>要获取详细的系统信息，可以调用uname()函数:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.uname()</span><br><span class="line">(<span class="string">'Linux'</span>, <span class="string">'woshijpf'</span>, <span class="string">'3.16.0-30-generic'</span>, <span class="string">'#40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015'</span>, <span class="string">'x86_64'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>注意uname()函数在Windows上不提供，也就是说，os模块的某些函数是跟操作系统相关的。</p>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>在操作系统中定义的环境变量，全部保存在<strong>os.environ</strong>这个dict中，可以直接查看:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ</span><br><span class="line">&#123;<span class="string">'MANDATORY_PATH'</span>: <span class="string">'/usr/share/gconf/ubuntu.mandatory.path'</span>, <span class="string">'XDG_GREETER_DATA_DIR'</span>: <span class="string">'/var/lib/lightdm-data/woshijpf'</span>, <span class="string">'GNOME_DESKTOP_SESSION_ID'</span>: <span class="string">'this-is-deprecated'</span>, <span class="string">'UPSTART_EVENTS'</span>: <span class="string">'started starting'</span>, <span class="string">'LESSOPEN'</span>: <span class="string">'| /usr/bin/lesspipe %s'</span>, <span class="string">'COLORTERM'</span>: <span class="string">'gnome-terminal'</span>, <span class="string">'ADBHOST'</span>: <span class="string">'192.168.1.100'</span>, <span class="string">'QT_IM_MODULE'</span>: <span class="string">'xim'</span>, <span class="string">'LOGNAME'</span>: <span class="string">'woshijpf'</span>, <span class="string">'USER'</span>: <span class="string">'woshijpf'</span>, <span class="string">'PATH'</span>: <span class="string">'/usr/local/MATLAB/R2014a/bin:/home/woshijpf/android/adt-bundle-linux-x86_64-20140702/ndk:/home/woshijpf/android/adt-bundle-linux-x86_64-20140702/sdk/platform-tools:/home/woshijpf/android/adt-bundle-linux-x86_64-20140702/sdk/tools:/usr/local/java/jdk1.8.0_05/bin:/usr/local/java/jdk1.8.0_05/jre/bin:/usr/local/java/jdk1.8.0_05:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想要获取某个环境变量的值，则可以通过os.getenv()函数进行获取:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.getenv(<span class="string">'USER'</span>)</span><br><span class="line"><span class="string">'woshijpf'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="操作文件和目录"><a href="#操作文件和目录" class="headerlink" title="操作文件和目录"></a>操作文件和目录</h4><p>操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中，这一点需要注意一下。查看、创建和删除目录可以这么调用:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前目录的绝对路径:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.abspath(<span class="string">'.'</span>)</span><br><span class="line"><span class="string">'/home/woshijpf/Nutstore/\xe5\xad\xa6\xe4\xb9\xa0/Python\xe5\xad\xa6\xe4\xb9\xa0/Python_Code/Exception_Processing'</span></span><br><span class="line"><span class="comment"># 在某个目录下创建一个新目录，</span></span><br><span class="line"><span class="comment"># 首先把新目录的完整路径表示出来:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(<span class="string">'/home/woshijpf/Nutstore/\xe5\xad\xa6\xe4\xb9\xa0/Python\xe5\xad\xa6\xe4\xb9\xa0/Python_Code/Exception_Processing'</span>,<span class="string">'testdir'</span>)</span><br><span class="line"><span class="string">'/home/woshijpf/Nutstore/\xe5\xad\xa6\xe4\xb9\xa0/Python\xe5\xad\xa6\xe4\xb9\xa0/Python_Code/Exception_Processing/testdir'</span></span><br><span class="line"><span class="comment"># 然后创建一个目录:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.mkdir(<span class="string">'/home/woshijpf/Nutstore/\xe5\xad\xa6\xe4\xb9\xa0/Python\xe5\xad\xa6\xe4\xb9\xa0/Python_Code/Exception_Processing/testdir'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删掉一个目录:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rmdir(<span class="string">'/home/woshijpf/Nutstore/\xe5\xad\xa6\xe4\xb9\xa0/Python\xe5\xad\xa6\xe4\xb9\xa0/Python_Code/Exception_Processing/testdir'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>把两个路径合成一个时，不要直接拼字符串，而要通过os.path.join()函数，这样可以正确处理不同操作系统的路径分隔符。在Linux/Unix/Mac下，os.path.join()返回这样的字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">part<span class="number">-1</span>/part<span class="number">-2</span></span><br></pre></td></tr></table></figure></p>
+<p>而在Windows系统中则会返回这样的字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">part<span class="number">-1</span>\part<span class="number">-2</span></span><br></pre></td></tr></table></figure></p>
+<p>同样的道理，如果我们想要拆分路径时，也不要直接u拆字符串，而可以通过os.path.split()函数，这样就可以把一个路径拆分成两部分，后一部分总是最后级别的目录或者文件名:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(<span class="string">'/home/woshijpf/eclipse.png'</span>)</span><br><span class="line">(<span class="string">'/home/woshijpf'</span>, <span class="string">'eclipse.png'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>os.path.splitext()函数还可以让你直接获得文件的扩展名，有时候这种操作就非常方便:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.splitext(<span class="string">'/home/woshijpf/eclipse.png'</span>)</span><br><span class="line">(<span class="string">'/home/woshijpf/eclipse'</span>, <span class="string">'.png'</span>)</span><br></pre></td></tr></table></figure>
+<p>这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作。</p>
+<p>文件操作则可以使用下面的函数。假定当前目录下有一个test.txt的文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对文件重命名:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rename(<span class="string">'test.txt'</span>, <span class="string">'test.py'</span>)</span><br><span class="line"><span class="comment"># 删掉文件:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.remove(<span class="string">'test.py'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>Python中的复制文件的函数并在os模块中，而是在shutil模块中，你还可以在shutil模块中找到许多实用函数，它们可以看做是os模块的补充。</p>
+<p>最后看看如何利用Python的特性来过滤文件。比如我们要列出当前目录下的所有目录，只需要一行代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x <span class="keyword">for</span> x <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> os.path.isdir(x)]</span><br><span class="line">[<span class="string">'.kde'</span>, <span class="string">'.pki'</span>, <span class="string">'OpenCV'</span>, <span class="string">'.PyCharm40'</span>, <span class="string">'.dbus'</span>, <span class="string">'.wireshark'</span>, <span class="string">'gedit_textmate'</span>, <span class="string">'.local'</span>, <span class="string">'pycharm-4.5.3'</span>, <span class="string">'android'</span>, <span class="string">'.sunpinyin'</span>, <span class="string">'.gvfs'</span>, <span class="string">'\xe9\x9f\xb3\xe4\xb9\x90'</span>, <span class="string">'ffmpeg_sources'</span>, <span class="string">'openvpn'</span>, <span class="string">'temp'</span>, <span class="string">'\xe5\x9b\xbe\xe7\x89\x87'</span>, <span class="string">'.purple'</span>, <span class="string">'.compiz'</span>, <span class="string">'.java'</span>, <span class="string">'.synaptic'</span>, <span class="string">'Matlab'</span>, <span class="string">'.gstreamer-0.10'</span>, <span class="string">'.npm'</span>, <span class="string">'.gnome'</span>, <span class="string">'\xe8\xa7\x86\xe9\xa2\x91'</span>, <span class="string">'HexoBlog'</span>, <span class="string">'Java'</span>, <span class="string">'.android'</span>, <span class="string">'.cache'</span>, <span class="string">'.openshot'</span>, <span class="string">'opencv-2.4.10'</span>, <span class="string">'.gconf'</span>, <span class="string">'\xe6\xa1\x8c\xe9\x9d\xa2'</span>, <span class="string">'Nutstore'</span>, <span class="string">'.gem'</span>, <span class="string">'.subversion'</span>, <span class="string">'.pip'</span>, <span class="string">'.matlab'</span>, <span class="string">'.python-eggs'</span>, <span class="string">'.thunderbird'</span>, <span class="string">'.ssh'</span>, <span class="string">'.nutstore'</span>, <span class="string">'\xe6\x96\x87\xe6\xa1\xa3'</span>, <span class="string">'PycharmProjects'</span>, <span class="string">'python_module'</span>, <span class="string">'pidgin-lwqq'</span>, <span class="string">'themes'</span>, <span class="string">'.swt'</span>, <span class="string">'.macromedia'</span>, <span class="string">'\xe5\x85\xac\xe5\x85\xb1\xe7\x9a\x84'</span>, <span class="string">'.mozilla'</span>, <span class="string">'.gimp-2.8'</span>, <span class="string">'.config'</span>, <span class="string">'goagent'</span>, <span class="string">'android-4.2.2_r1'</span>, <span class="string">'.pcb'</span>, <span class="string">'\xe4\xb8\x8b\xe8\xbd\xbd'</span>, <span class="string">'\xe6\xa8\xa1\xe6\x9d\xbf'</span>, <span class="string">'.adobe'</span>, <span class="string">'.gphoto'</span>, <span class="string">'.kingsoft'</span>, <span class="string">'laserkbd'</span>, <span class="string">'software'</span>, <span class="string">'.thumbnails'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>如果想要列出所有的.py文件，也只需要一行代码:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[x <span class="keyword">for</span> x <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> os.path.isfile(x) <span class="keyword">and</span> os.path.splitext(x)[<span class="number">1</span>]==<span class="string">'.py'</span>]</span><br><span class="line">[<span class="string">'test.py'</span>]</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-序列化"><a href="#2-3-序列化" class="headerlink" title="2.3 序列化 "></a>2.3 序列化 <span id="2.3"></span></h3><p>我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中pickling，在其他语言中也被称为之为serialization，marshalling，flattening等等，都是一个意思。</p>
+<p>序列化之后，就可以把序列化后的内容写入到磁盘中，或者通过网络传输到别的机器上。</p>
+<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<p>Python提供两个模块来实现序列化: cPickle和pickle。这两个模块功能是一样的，区别在于cPickle是用C语言写的，速度快，pickle则是用纯Python写的，速度慢，跟cStringIo和StringIO一个道理，用的时候，先尝试导入cPickle，如果失败再导入Pickle:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="keyword">import</span> cPickle <span class="keyword">as</span> pickle</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">	<span class="keyword">import</span> pickle</span><br></pre></td></tr></table></figure></p>
+<p>首先，我们尝试把一个对象序列化并写入文件:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = dict(name=<span class="string">'Bob'</span>,age=<span class="number">20</span>,score=<span class="number">88</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pickle.dumps(d)</span><br><span class="line"><span class="string">"(dp1\nS'age'\np2\nI20\nsS'score'\np3\nI88\nsS'name'\np4\nS'Bob'\np5\ns."</span></span><br></pre></td></tr></table></figure></p>
+<p>pickle.dumps()方法可以把任意可序列化的对象序列化成一个字符串，然后，就可以把这个str写入文件。或者用另外一个方法pickle.dump()直接把对象序列化后写入一个file-like Object:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'dump.txt'</span>,<span class="string">'wb'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pickle.dump(d,f)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.close()</span><br></pre></td></tr></table></figure></p>
+<p>查看写入到dump.txt文件中内容都是一堆乱七八糟的，这些都是Python保存的对象内部信息。</p>
+<p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个str，然后用pickle.loads()方法反序列化出对象，也可以直接用pickle.load()方法从一个file-like Object中直接反序列化出对象，例如我们把刚才序列化写入dump.txt文件中的对象，使用pickle.load()方法将其反序列化成对象:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'dump.txt'</span>,<span class="string">'rb'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = pickle.load(f)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">&#123;<span class="string">'age'</span>: <span class="number">20</span>, <span class="string">'score'</span>: <span class="number">88</span>, <span class="string">'name'</span>: <span class="string">'Bob'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.close()</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到变量的内容又回来了！但是这个变量和我们原来那个变量是完全不相干的对象，它们只是内容相同而已。</p>
+<p>Pickle的问题和所有其他编程语言特有的序列化问题一样，就是它只能用于Python，并且可能不同版本的Python彼此都不兼容，因此，只能用Pickle保存那些不重要的数据，不能成功地反序列化也没关系。</p>
+<h4 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h4><p>如果我们想要在不同的编程语言之间传递对象，就必须把对象序列化成标准的格式，比如XML，但更好的方法是序列化为JSON，因为JSON表示出来的就是一个字符串，可以被所有的语言读取，也可以方便地存储到磁盘或者通过网络传输。JSON不仅是标准格式，并且比XML更快，而且可以直接在Web页面中读取，非常方便。</p>
+<p>JSON表示的对象就是标准的JavaScript语言对象，JSON和Python内置的数据类型对应如下:</p>
+<table>
+<thead>
+<tr>
+<th>JSON类型</th>
+<th>Python类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{}</td>
+<td>dict</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>list</td>
+</tr>
+<tr>
+<td>“String”</td>
+<td>‘str’或者u‘unicode’</td>
+</tr>
+<tr>
+<td>1234.56</td>
+<td>int或float</td>
+</tr>
+<tr>
+<td>true/false</td>
+<td>True/False</td>
+</tr>
+<tr>
+<td>null</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>Python内置的json模块提供了非常完善的Python对象到JSON格式的转换。我们先看看如何把Python对象变成一个JSON:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = dict(name=<span class="string">'Bob'</span>,age=<span class="number">20</span>,score=<span class="number">88</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(d)</span><br><span class="line"><span class="string">'&#123;"age": 20, "score": 88, "name": "Bob"&#125;'</span></span><br></pre></td></tr></table></figure></p>
+<p>dumps()方法返回一个str，内容就是标准的JSON。类似的，dump()方法可以直接把JSON写入一个file-like Object。</p>
+<p>要把JSON反序列化为Python对象，用loads()或者对应的load()方法，前者把JSON的字符串反序列化，后者从file-like Object中读取字符串并反序列化:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>json_str=<span class="string">'&#123;"age": 20, "score": 88, "name": "Bob"&#125;'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(json_str)</span><br><span class="line">&#123;<span class="string">u'age'</span>: <span class="number">20</span>, <span class="string">u'score'</span>: <span class="number">88</span>, <span class="string">u'name'</span>: <span class="string">u'Bob'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有一点需要注意，就是反序列化得到的所有字符串对象默认都是unicode而不是str。由于JSON标准规定JSON编码是UTF-8，所以我们总能正确地在Python的str或者unicode与JSON的字符串之间进行转换。</p>
+<h4 id="JSON进阶"><a href="#JSON进阶" class="headerlink" title="JSON进阶"></a>JSON进阶</h4><p>Python中的dict对象是可以直接序列化成JSON的{}，但是很多时候，我们自定义的类的对象是无法直接序列化。例如，我们自定义一个Student对象，然后序列化:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,age,score)</span>:</span></span><br><span class="line">		self.name = name</span><br><span class="line">		self.age = age</span><br><span class="line">		self.score = score</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">'Bob'</span>,<span class="number">20</span>,<span class="number">88</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> json.dumps(s)</span><br></pre></td></tr></table></figure></p>
+<p>运行代码，我们则会得到这样一个结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"/usr/lib/python2.7/json/encoder.py"</span>, line 184, <span class="keyword">in</span> default</span><br><span class="line">    raise TypeError(repr(o) + <span class="string">" is not JSON serializable"</span>)</span><br><span class="line">TypeError: &lt;__main__.Student object at 0x7fd5d3ffa710&gt; is not JSON serializable</span><br></pre></td></tr></table></figure></p>
+<p>导致错误的原因就是Student对象不是一个可序列化的JSON对象。</p>
+<p>我们分析json库中的dumps()方法的参数列表可知，除了第一个必须的obj参数是必选参数之外，dumps()方法还提供了一大堆可选的参数，有关函数说明，详见下面的链接:<a href="https://docs.python.org/2/library/json.html#json.dumps" target="_blank" rel="external">https://docs.python.org/2/library/json.html#json.dumps</a></p>
+<p>dumps()方法中的可选参数defult()就是把任意一个对象变成一个可序列化的JSON对象，我们只需要为Student专门写一个转换函数，再把转换函数传进去即可:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">student2dict</span><span class="params">(std)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		<span class="string">'name'</span>:std.name,</span><br><span class="line">		<span class="string">'age'</span>:std.age,</span><br><span class="line">		<span class="string">'score'</span>:std.score</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">s = Student(<span class="string">'Bob'</span>,<span class="number">20</span>,<span class="number">88</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> json.dumps(s,default=student2dict)</span><br></pre></td></tr></table></figure></p>
+<p>这样，Student类的实例就会首先被student2dict()函数转换成dict，然后在被序列化成JSON。</p>
+<p>不过，下次如果遇到一个Teacher类的实例，照样无法序列化为JSON。我们可以偷个懒，把任意class的实例变为dict:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(json.dumps(s,default=<span class="keyword">lambda</span> obj:obj.__dict__))</span><br></pre></td></tr></table></figure></p>
+<p>因为通常class实例都有一个__dict__属性，它就是一个dict，用来存储实例变量。也有少数例外，比如定义了__slots__的类。</p>
+<p>同样的道理，如果我们要把JSON反序列化为一个Student对象实例，loads()方法首先转换出一个dict对象，然后，我们传入的object_hook函数负责把dict转换成Student实例。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dict2student</span><span class="params">(d)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Student(d[<span class="string">'name'</span>], d[<span class="string">'age'</span>], d[<span class="string">'score'</span>])</span><br><span class="line"></span><br><span class="line">json_str = <span class="string">'&#123;"age": 20, "score": 88, "name": "Bob"&#125;'</span></span><br><span class="line">print(json.loads(json_str, object_hook=dict2student))</span><br></pre></td></tr></table></figure></p>
+<p>最后，运行得到的结果为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python student_pickling.py </span><br><span class="line">&lt;__main__.Student object at 0x7f30d3b80810&gt;</span><br></pre></td></tr></table></figure></p>
+<p>打印出的是反序列化后的Student实例对象。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/学习/" rel="tag">#学习</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/23/Python学习笔记3/" rel="next" title="Python学习笔记（3）">
+                <i class="fa fa-chevron-left"></i> Python学习笔记（3）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/03/Linux下make和Makefile详解释/" rel="prev" title="Linux中make和Makefile详解">
+                Linux中make和Makefile详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/25/Python学习笔记4/"
+           data-title="Python 学习笔记（4）" data-url="http://woshijpf.github.io/2015/07/25/Python学习笔记4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xj51c.com1.z0.glb.clouddn.com/%E5%A4%9A%E6%9D%A5A%E6%A2%A62.png"
+               alt="woshijpf" />
+          <p class="site-author-name" itemprop="name">woshijpf</p>
+          <p class="site-description motion-element" itemprop="description">Talk is cheap show me the code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/woshijpf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/jiang-peng-fei-24" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/56692971/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2434965031/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-错误、测试和调试"><span class="nav-number"></span> <span class="nav-text">1. 错误、测试和调试 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-错误处理"><span class="nav-number">1.</span> <span class="nav-text">1.1 错误处理 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调用堆栈"><span class="nav-number">1.1.</span> <span class="nav-text">调用堆栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抛出错误"><span class="nav-number">1.2.</span> <span class="nav-text">抛出错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-调试"><span class="nav-number">2.</span> <span class="nav-text">1.2 调试 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用print输出关键变量"><span class="nav-number">2.1.</span> <span class="nav-text">使用print输出关键变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#断言"><span class="nav-number">2.2.</span> <span class="nav-text">断言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logging"><span class="nav-number">2.3.</span> <span class="nav-text">logging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdb"><span class="nav-number">2.4.</span> <span class="nav-text">pdb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdb-set-trace-设置断点"><span class="nav-number">2.5.</span> <span class="nav-text">pdb.set_trace()设置断点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDE"><span class="nav-number">2.6.</span> <span class="nav-text">IDE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-单元测试"><span class="nav-number">3.</span> <span class="nav-text">1.3 单元测试 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行单元测试"><span class="nav-number">3.1.</span> <span class="nav-text">运行单元测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setUp和tearDown"><span class="nav-number">3.2.</span> <span class="nav-text">setUp和tearDown()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-IO编程"><span class="nav-number"></span> <span class="nav-text">2. IO编程 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-文件读写"><span class="nav-number">1.</span> <span class="nav-text">2.1 文件读写 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#file-like-Object"><span class="nav-number">1.1.</span> <span class="nav-text">file-like Object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件"><span class="nav-number">1.2.</span> <span class="nav-text">二进制文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符编码"><span class="nav-number">1.3.</span> <span class="nav-text">字符编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写文件"><span class="nav-number">1.4.</span> <span class="nav-text">写文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-操作文件和目录"><span class="nav-number">2.</span> <span class="nav-text">2.2 操作文件和目录 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量"><span class="nav-number">2.1.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作文件和目录"><span class="nav-number">2.2.</span> <span class="nav-text">操作文件和目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-序列化"><span class="nav-number">3.</span> <span class="nav-text">2.3 序列化 </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON"><span class="nav-number">3.1.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON进阶"><span class="nav-number">3.2.</span> <span class="nav-text">JSON进阶</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">woshijpf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"woshijpf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

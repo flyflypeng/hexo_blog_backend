@@ -1,0 +1,1022 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="BCxS4BjJYARXVYW3XUNGoFXtHimMMOMHzchkfIWFhS4" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,make,Makefile," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/smile_Doraemon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="目录
+
+前言
+make和Makefile2.1 make简介2.2 Makefile简介2.3 Makefile规则介绍2.4 一个简单的Makefile的例子2.5 make是如何处理一个Makefile文件2.6 清空目标文件规则
+
+
+1. 前言 如果你有手动从源码编译过linux应用程序的经历，那么你肯定不会对”./configure“,”make”,”make install”这些命令感到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux中make和Makefile详解">
+<meta property="og:url" content="http://woshijpf.github.io/2015/09/03/Linux下make和Makefile详解释/index.html">
+<meta property="og:site_name" content="woshijpf's blog">
+<meta property="og:description" content="目录
+
+前言
+make和Makefile2.1 make简介2.2 Makefile简介2.3 Makefile规则介绍2.4 一个简单的Makefile的例子2.5 make是如何处理一个Makefile文件2.6 清空目标文件规则
+
+
+1. 前言 如果你有手动从源码编译过linux应用程序的经历，那么你肯定不会对”./configure“,”make”,”make install”这些命令感到">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/compile_and_link_procedure.jpg">
+<meta property="og:updated_time" content="2016-03-09T15:08:54.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux中make和Makefile详解">
+<meta name="twitter:description" content="目录
+
+前言
+make和Makefile2.1 make简介2.2 Makefile简介2.3 Makefile规则介绍2.4 一个简单的Makefile的例子2.5 make是如何处理一个Makefile文件2.6 清空目标文件规则
+
+
+1. 前言 如果你有手动从源码编译过linux应用程序的经历，那么你肯定不会对”./configure“,”make”,”make install”这些命令感到">
+<meta name="twitter:image" content="http://7xj51c.com1.z0.glb.clouddn.com/compile_and_link_procedure.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Linux中make和Makefile详解 | woshijpf's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63075912-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?918348754b933e7ef9176e5e0720b4f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">woshijpf's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'TG4h5bcA6H_tjQY9KK_w','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux中make和Makefile详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-03T22:03:00+08:00" content="2015-09-03">
+              2015-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/03/Linux下make和Makefile详解释/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/03/Linux下make和Makefile详解释/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><blockquote>
+<ol>
+<li><a href="#1">前言</a></li>
+<li><a href="#2">make和Makefile</a><br>2.1 <a href="#2.1">make简介</a><br>2.2 <a href="#2.2">Makefile简介</a><br>2.3 <a href="#2.3">Makefile规则介绍</a><br>2.4 <a href="#2.4">一个简单的Makefile的例子</a><br>2.5 <a href="#2.5">make是如何处理一个Makefile文件</a><br>2.6 <a href="#2.6">清空目标文件规则</a></li>
+</ol>
+</blockquote>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言 "></a>1. 前言 <span id="1"></span></h2><p>如果你有手动从源码编译过linux应用程序的经历，那么你肯定不会对”./configure“,”make”,”make install”这些命令感到陌生。下面我们就来探索一下这个过程中的每一都发生了什么。</p>
+<p>在Linux系统环境中使用GNU的make工具可以很方便地构建和编译一个大型的工程,整个工程的编译只需要一个命令”make”就可以完成编译、链接和运行。不过在使用”make”命令之前，我们需要完成一个叫做”Makefile”文件的编写，这个文件详细描述了我们整个工程该如何取编译、链接以及最后生成一个可执行的文件，以及这个过程中所需要依赖的文件和其他工具软件。</p>
+<a id="more"></a>
+<p>在介绍make和Makefile之前，我们来补充说明一下linux下一个简单C语言源程序的编译、链接的过程。</p>
+<p>编译: 编译就是把文本形式的源代码翻译称为及其语言形式的目标文件的过程。<br>链接: 链接就是把目标文件和使用到的库文件进行组织，最终形成可执行代码的过程。<br>整个编译和链接的过程的图解如下:<br><img src="http://7xj51c.com1.z0.glb.clouddn.com/compile_and_link_procedure.jpg" alt="编译链接图解"></p>
+<p>从上图可知，整个代码编译的过程分为编译和链接两个阶段，其中编译对应的是大括号对应的部分，其余则是链接过程。</p>
+<p>在这里我们还要特别说明一下linux中的库文件！<br>库: 库是一组<strong>预先编译好的函数的集合</strong>，这些函数都是按照可重用的原则编写的。</p>
+<p>在linux中库文件可以分为静态库和共享库(有的地方也叫做动态库)。<br>静态库: 它也称为归档文件(archive file)，按照惯例它们的文件都是以”.a”结尾，比如标准C语言函数库”/usr/lib/libc.a”。静态库在程序链接时会使用，链接器会将程序中使用到函数的代码从静态库文件中拷贝到应用程序中。一旦链接完成，在执行程序的时候就不需要静态库了。由于每个使用静态库的应用程序都需要拷贝所用到函数的代码，所以静态链接生成的可执行文件都会比较大。</p>
+<p>共享库: 共享库以”.so”结尾(so = shared objecct)。共享库在程序链接的时候并不像静态库那样在拷贝所使用到函数的代码到应用程序中，而只是作些标记。然后在程序加载到内存中开始运行的时候，动态地加载所需的共享库。所以，应用程序在运行的时候仍然需要共享库的支持，共享库链接出来的文件要比静态库要小的多。</p>
+<h2 id="2-make和Makefile"><a href="#2-make和Makefile" class="headerlink" title="2. make和Makefile "></a>2. make和Makefile <span id="2"></span></h2><h3 id="2-1-make简介"><a href="#2-1-make简介" class="headerlink" title="2.1 make简介 "></a>2.1 make简介 <span id="2.1"></span></h3><p>make是一个GNU/Linux中自带一个使用软件工具，它能够自动地判断出一个大的工程文件中那些源文件需要被重新编译，并且可以直接使用特定的命令来对这些文件进行重新编译。</p>
+<h3 id="2-2-Makefile简介"><a href="#2-2-Makefile简介" class="headerlink" title="2.2 Makefile简介 "></a>2.2 Makefile简介 <span id="2.2"></span></h3><p>当你准备使用”make”命令来编译你的工程文件前，你需要准备好一个叫做Makefile的文件。通常，这个文件会告诉make如何编译和链接程序，在这个文件中主要描述了你程序中各个文件之间的关系并且提供了一些命令来编译文件，最终生成可执行的目标文件。</p>
+<p>当使用make工具进行编译时，工程中以下几种文件在执行make时将会被编译(重新编译):</p>
+<ol>
+<li>所有的源文件都没有被编译过，则对各个源文件进行编译和链接，生成最后可执行的程序。</li>
+<li>每一个在上次执行make之后修改过的源文件在本次执行make时，都会被重新编译。</li>
+<li>头文件在上次执行make之后被修改过，那么所有包含该修改过头文件的源程序文件都会在执行本次make命令时重新进行编译。</li>
+</ol>
+<h3 id="2-3-Makefile规则介绍"><a href="#2-3-Makefile规则介绍" class="headerlink" title="2.3 Makefile规则介绍 "></a>2.3 Makefile规则介绍 <span id="2.3"></span></h3><p>一个简单的Makefile由以下这种类型的“规则”构成:</p>
+<blockquote>
+<p>target…: prerequistes…<br>[tab] command</p>
+</blockquote>
+<p><strong>target: 规则目标</strong>。target通常是最后需要生成的文件名或者为了实现这个目的而必须的中间过程文件名，可以是目标文件名“*.o”或者最后可执行的程序的文件名。另外，目标也可以是一个make执行动作的的名称，比如“clean”(目标”clean”不是一个文件，它仅仅代表执行一个动作的标识)，我们将这样的目标称为“伪目标”。</p>
+<p><strong>prerequisites:规则依赖</strong>。生成规则目标所需要的文件列表。通常一个目标依赖于一个或者多个文件。</p>
+<p><strong>command: 规则的命令行</strong>，是规则所要执行的动作（任意的shell命令或者是可在shell中执行的程序）。它限定了make执行这条规则时所需要的动作。一个规则可以有多个命令行，每一条命令占一行。<br><strong>注意: 每一个命令行必须以[Tab]字符开始，[Tab]字符告诉make此行是一个命令行。make按照命令完成相应的动作。这也是书写Makefile中容易产生并且十分隐蔽的错误。</strong></p>
+<p>命令就是在任何一个目标的依赖文件发生变化后重建目标的动作描述。一个目标可以没有依赖而只有动作（指定的命令）。比如Makefile中的目标“clean”，此目标没有依赖，只有命令。它所定义的命令用来删除make过程中生成的中间文件，进行清理工作。</p>
+<p>在Makefile中“规则”就是描述在什么情况下、如何重建规则的目标文件，通常规则中包括了目标的依赖关系（目标的依赖文件）和重建目标的命令。make执行重建目标的命令，来创建或者重建规则的目标（此目标文件也可以是触发这个规则的上一个规则中依赖文件）。规则包含了文件之间的依赖关系和更新此规则目标所需要的命令。</p>
+<p>一个Makefile文件中通常还包含了除规则以外的很多东西。一个最简单的Makefile可能只包含规则。规则在有些Makefile中可能看起来非常复杂，但是无论规则的书写是多么复杂，它都符合规则的基本格式。</p>
+<p><strong>规则告诉make就是两件事情，第一就是文件的依赖关系，第二就是如何生成目标文件</strong></p>
+<h2 id="2-4-一个简单的Makefile的例子"><a href="#2-4-一个简单的Makefile的例子" class="headerlink" title="2.4 一个简单的Makefile的例子 "></a>2.4 一个简单的Makefile的例子 <span id="2.4"></span></h2><p>为了更好地理解Makefile，我们就通过一个简单的例子来进行阐述说明。在这个例子中，我们有总共有三个文件file1.c,file2.c和file2.h，通过这三个文件我们要构造一个可执行的目标程序“helloworld”。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//file1.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"file2.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"print file1$$$$$$$$$$$$$$$$$$$$\n"</span>);</span><br><span class="line">	File2Print();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//file2.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> FILE2_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE2_H_</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">		<span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">File2Print</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//file2.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"file2.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">File2Print</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Print file2********************\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">helloworld:file1.o file2.o</span><br><span class="line">	gcc file1.o file2.o -o helloworld</span><br><span class="line">file1.o: file1.c file2.h</span><br><span class="line">	gcc -c file1.c -o file1.o</span><br><span class="line">file2.o: file2.c file2.h</span><br><span class="line">	gcc -c file2.c -o file2.o</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf *.o helloworld</span><br></pre></td></tr></table></figure>
+<p>上面的makefile文件目的就是要编译一个helloworld的可执行文件。让我们一句句来解释:<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">helloworld:file1.o file2.o  <span class="comment">#目标helloworld依赖于file1.o和file2.o两个目标文件。</span></span><br><span class="line"></span><br><span class="line">	gcc file1.o file2.o -o helloworld  #使用gcc编译出helloworld可执行文件。-o 表示执行输出的目标文件名。</span><br><span class="line">    </span><br><span class="line">file1.o: file1.c file2.h   <span class="comment">#file1.o依赖于file1.c和file2.h文件。</span></span><br><span class="line"></span><br><span class="line">	gcc -c file1.c -o file1.o  #编译出file1.o文件。-c表示gcc只把源文件编译成目标文件。</span><br><span class="line">    </span><br><span class="line">file2.o: file2.c file2.h</span><br><span class="line">	gcc -c file2.c -o file2.o</span><br><span class="line"><span class="comment">#这两句的含义上面两句的含义相同</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf *.o helloworld</span><br><span class="line"><span class="comment">#当用户在shenll终端中输入make clean的命令时，就会删除*.o和helloworld文件。</span></span><br></pre></td></tr></table></figure></p>
+<p>写好Makefile文件之后，只需要简单地在终端命令行中输入make命令，就会开始执行Makefile中的内容了。</p>
+<h3 id="2-4-1-使用变量"><a href="#2-4-1-使用变量" class="headerlink" title="2.4.1 使用变量"></a>2.4.1 使用变量</h3><p>如果我们需要编译cpp文件时，只需要把gcc改成g++就可以了。但是如果Makefile中有很多gcc，那不就很麻烦嘛。<br>下面我们就使用变量来改写上面的Makefile文件。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OBJS = file1.o file2.o</span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -Wall -O -g</span><br><span class="line">helloworld:$(OBJS)</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(OBJS)</span> -o helloworld</span><br><span class="line">file1.o:file1.c file2.h</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c file1.c -o file1.o</span><br><span class="line">file2.o:file2.c file2.h</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c file2.c -o file2.o</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf *.o helloworld</span><br></pre></td></tr></table></figure></p>
+<p>在上面我们使用到了变量。如果要设定一个变量，你只要在一行的开始写下这个变量的名字，后面跟一个“=”号，后面跟你要设定的这个变量的值。已有你要引用这个变量，写一个“$“符号在变量名前，就表示引用变量的值。</p>
+<p>CFLAGS = -Wall -O -g，解释一下，这个是gcc编译器的参数设置，并把它赋值给CFLAGS变量。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-Wall</td>
+<td>输出所有的警告信息</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>在编译时进行优化</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>表示编译debug版本</td>
+</tr>
+</tbody>
+</table>
+<p>这样写的Makefile文件比较简单，但很容易就会发现缺点，那就是要列出所有的c文件。如果你添加一个c文件，那就需要对Makefile文件进行修改，这在项目开发中是比较麻烦的。</p>
+<h3 id="2-4-2-使用函数"><a href="#2-4-2-使用函数" class="headerlink" title="2.4.2 使用函数"></a>2.4.2 使用函数</h3><p>学到这里，你可能发现在Makefile中既有变量，又有函数，这不就是在编程吗？其实写Makefile就是在编程，只不过使用不同的语言而已。</p>
+<p>下面我们就使用函数来继续改写上面的Makefile。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line">XX = g++</span><br><span class="line">CFLAGS = -Wall -O -g</span><br><span class="line">TARGET =  ./helloworld</span><br><span class="line">%.o:%.c</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c $&lt; -o $@</span><br><span class="line">%.o:%.cpp</span><br><span class="line">	<span class="variable">$(XX)</span> <span class="variable">$(CFLAGS)</span> -c $&lt; -o $@</span><br><span class="line">SOURCES = <span class="variable">$(wildcard *.c *.cpp)</span></span><br><span class="line">OBJS = <span class="variable">$(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)</span>))</span><br><span class="line"></span><br><span class="line">$(TARGET):$(OBJS)</span><br><span class="line">	<span class="variable">$(XX)</span> <span class="variable">$(OBJS)</span> -o <span class="variable">$(TARGET)</span></span><br><span class="line">    chmod a+x $(TARGET)</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf *.o helloworld</span><br></pre></td></tr></table></figure></p>
+<p>看到上面这个Makefile文件我们的感觉就是要炸了，什么语法啊，看不懂啊，所以我们要一步一步来分析。</p>
+<p>函数1: wildcard<br>功能: 产生一个所有以“.c”结尾的文件的列表<br>SOURCES = $(wildcard <em>.c </em>.cpp)  #这句代码表示产生一个所有以.c，.cpp结尾的文件的列表，然后存入变量SOURCES中。</p>
+<p>函数: patsubst<br>功能: 匹配替换，有三个参数。第一个参数是一个需要匹配的式样，第二个表示用什么来替换它，第三个是一个需要<strong>被处理的由空格分隔的文件列表</strong><br>OBJS = $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)))  #这句代码表示把文件列表中的所有的.c,.cpp字符变成.o，形成一个新的文件列表，然后存入OBJS变量中。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%.o:%.c</span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c $&lt; -o $@</span><br><span class="line">%.o:%.cpp</span><br><span class="line">	<span class="variable">$(XX)</span> <span class="variable">$(CFLAGS)</span> -c $&lt; -o $@</span><br></pre></td></tr></table></figure>
+<p>这几句命令表示把所有的 .c , .cpp 文件编译成.o文件。<br>这里有三个比较有用的内部变量:</p>
+<table>
+<thead>
+<tr>
+<th>内部变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$@</td>
+<td>表示目标文件</td>
+</tr>
+<tr>
+<td>$&lt;</td>
+<td>表示依赖文件列表中第一个依赖文件</td>
+</tr>
+<tr>
+<td>$^</td>
+<td>表示整个依赖文件列表</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>表示比目标文件还要新的依赖文件列表</td>
+</tr>
+</tbody>
+</table>
+<p>chmod a+x $(TARGET)表示把helloworld强制变成可执行的文件。</p>
+<p>到此，我们就可以编写一个比较简单通用的Makefile文件了。</p>
+<p><strong>上面的所有例子，都假定所有的文件都在同一个目录下，不包括字目录。</strong></p>
+<h3 id="2-5-Make是如何处理一个Makefile文件"><a href="#2-5-Make是如何处理一个Makefile文件" class="headerlink" title="2.5 Make是如何处理一个Makefile文件 "></a>2.5 Make是如何处理一个Makefile文件 <span id="2.5"></span></h3><p>在默认情况下，也就是我们只在shell环境中输入一个make命令，那么make接下来会执行以下的操作:</p>
+<ol>
+<li>make会在当前目录下寻找一个名字叫做”Makefile”的文件。</li>
+<li>然后make会在Makefile文件中找到第一个目标(target)，并将该目标当做最终要生成的目标，例如上面例子中的“helloworld”。</li>
+<li>在make执行第一条规则之前（例如我们上面例子中生成helloworld可执行程序的规则），首先需要把目标可执行程序(target)所依赖的其他目标文件(object)的规则先执行处理完（在上面的例子中就是要先生成目标文件file1.o和file2.o）。</li>
+<li>当规则中依赖文件中源程序文件或者头文件经过修改导致更新的时间比目标文件更新时或者目标文件根本不存在时，则这个规则就会进行编译(complication)或者重建(recomplication)。</li>
+<li>在编译生成或者重新编译生成第一个目标所需的依赖文件后，make最后就会执行第一条规则中的命令，将一个或者多个依赖文件链接生成最终的可执行程序。如果所依赖的目标文件更新的时间比原来已经存在的目标文件生成的时间还新的话，那么也会进行目标重建。</li>
+</ol>
+<h3 id="2-6-清空目标文件的规则"><a href="#2-6-清空目标文件的规则" class="headerlink" title="2.6 清空目标文件的规则 "></a>2.6 清空目标文件的规则 <span id="2.6"></span></h3><p>每个Makefile都应该编写一个清空目标文件(.o和执行文件)的规则，这不仅便于重编译，也很利于保持文件的整洁。<br>一般的风格是:<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm *.o helloworld</span><br></pre></td></tr></table></figure></p>
+<p>但是更为稳健的方法是:<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	-rm *.o helloworld</span><br></pre></td></tr></table></figure></p>
+<p>在这里”.PHONY”的意思表示clean是一个“伪目标”，而在rm命令前机上一个小减号”-“表示的意思是:也许莫邪文件出现了问题，但是不要管，继续做后面的事。当然，clean的规则不要放在文件的开头，不然会被make以为是默认的目标。所有有个不成文的规定是——“clean从来都是放在最后面的”。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/make/" rel="tag">#make</a>
+          
+            <a href="/tags/Makefile/" rel="tag">#Makefile</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/25/Python学习笔记4/" rel="next" title="Python 学习笔记（4）">
+                <i class="fa fa-chevron-left"></i> Python 学习笔记（4）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/09/2016年书单/" rel="prev" title="2016 年书单">
+                2016 年书单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/09/03/Linux下make和Makefile详解释/"
+           data-title="Linux中make和Makefile详解" data-url="http://woshijpf.github.io/2015/09/03/Linux下make和Makefile详解释/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xj51c.com1.z0.glb.clouddn.com/%E5%A4%9A%E6%9D%A5A%E6%A2%A62.png"
+               alt="woshijpf" />
+          <p class="site-author-name" itemprop="name">woshijpf</p>
+          <p class="site-description motion-element" itemprop="description">Talk is cheap show me the code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/woshijpf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/jiang-peng-fei-24" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/56692971/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2434965031/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number"></span> <span class="nav-text">1. 前言 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-make和Makefile"><span class="nav-number"></span> <span class="nav-text">2. make和Makefile </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-make简介"><span class="nav-number">1.</span> <span class="nav-text">2.1 make简介 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Makefile简介"><span class="nav-number">2.</span> <span class="nav-text">2.2 Makefile简介 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Makefile规则介绍"><span class="nav-number">3.</span> <span class="nav-text">2.3 Makefile规则介绍 </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-一个简单的Makefile的例子"><span class="nav-number"></span> <span class="nav-text">2.4 一个简单的Makefile的例子 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-使用变量"><span class="nav-number">1.</span> <span class="nav-text">2.4.1 使用变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-使用函数"><span class="nav-number">2.</span> <span class="nav-text">2.4.2 使用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Make是如何处理一个Makefile文件"><span class="nav-number">3.</span> <span class="nav-text">2.5 Make是如何处理一个Makefile文件 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-清空目标文件的规则"><span class="nav-number">4.</span> <span class="nav-text">2.6 清空目标文件的规则 </span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">woshijpf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"woshijpf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

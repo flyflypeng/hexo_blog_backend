@@ -1,0 +1,1158 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="BCxS4BjJYARXVYW3XUNGoFXtHimMMOMHzchkfIWFhS4" />
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Markdown," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/smile_Doraemon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="目录
+
+Markdown简介
+Markdown基本语法
+2.1 标题
+2.2 列表
+2.3 链接
+2.4 图片
+2.5 代码块
+2.6 引用
+2.7 粗体和斜体
+2.8 表格
+2.9 分隔符
+2.10 特殊字符插入
+
+
+Markdown中页内跳转实现
+Markdown编辑器推荐
+Markdown使用小技巧
+
+
+1. Markdown简介 Markdown 是一种「电子邮件」风格的「标记语言」，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown简易教程">
+<meta property="og:url" content="http://woshijpf.github.io/2015/07/12/Markdown简易教程/index.html">
+<meta property="og:site_name" content="woshijpf's blog">
+<meta property="og:description" content="目录
+
+Markdown简介
+Markdown基本语法
+2.1 标题
+2.2 列表
+2.3 链接
+2.4 图片
+2.5 代码块
+2.6 引用
+2.7 粗体和斜体
+2.8 表格
+2.9 分隔符
+2.10 特殊字符插入
+
+
+Markdown中页内跳转实现
+Markdown编辑器推荐
+Markdown使用小技巧
+
+
+1. Markdown简介 Markdown 是一种「电子邮件」风格的「标记语言」，">
+<meta property="og:image" content="http://7xj51c.com1.z0.glb.clouddn.com/markdown.jpg">
+<meta property="og:updated_time" content="2016-03-09T06:12:24.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown简易教程">
+<meta name="twitter:description" content="目录
+
+Markdown简介
+Markdown基本语法
+2.1 标题
+2.2 列表
+2.3 链接
+2.4 图片
+2.5 代码块
+2.6 引用
+2.7 粗体和斜体
+2.8 表格
+2.9 分隔符
+2.10 特殊字符插入
+
+
+Markdown中页内跳转实现
+Markdown编辑器推荐
+Markdown使用小技巧
+
+
+1. Markdown简介 Markdown 是一种「电子邮件」风格的「标记语言」，">
+<meta name="twitter:image" content="http://7xj51c.com1.z0.glb.clouddn.com/markdown.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Markdown简易教程 | woshijpf's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63075912-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?918348754b933e7ef9176e5e0720b4f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">woshijpf's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'TG4h5bcA6H_tjQY9KK_w','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Markdown简易教程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-12T11:01:00+08:00" content="2015-07-12">
+              2015-07-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/12/Markdown简易教程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/12/Markdown简易教程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xj51c.com1.z0.glb.clouddn.com/markdown.jpg" alt="Markdown"></p>
+<blockquote>
+<p><strong>目录</strong></p>
+<ol>
+<li><a href="#1">Markdown简介</a></li>
+<li><a href="#2">Markdown基本语法</a><ul>
+<li>2.1 <a href="#2.1">标题</a></li>
+<li>2.2 <a href="#2.2">列表</a></li>
+<li>2.3 <a href="#2.3">链接</a></li>
+<li>2.4 <a href="#2.4">图片</a></li>
+<li>2.5 <a href="#2.5">代码块</a></li>
+<li>2.6 <a href="#2.6">引用</a></li>
+<li>2.7 <a href="#2.7">粗体和斜体</a></li>
+<li>2.8 <a href="#2.8">表格</a></li>
+<li>2.9 <a href="#2.9">分隔符</a></li>
+<li>2.10 <a href="#2.10">特殊字符插入</a></li>
+</ul>
+</li>
+<li><a href="#3">Markdown中页内跳转实现</a></li>
+<li><a href="#4">Markdown编辑器推荐</a></li>
+<li><a href="#5">Markdown使用小技巧</a></li>
+</ol>
+</blockquote>
+<h2 id="1-Markdown简介"><a href="#1-Markdown简介" class="headerlink" title="1. Markdown简介 "></a>1. Markdown简介 <span id="1"></span></h2><p>Markdown 是一种「电子邮件」风格的「标记语言」，它的目标就是实现「易读易写」，现在Markdown已经成为一种适用于网络的书写语言。<br>总结Markdown的优点就是:</p>
+<ul>
+<li>纯文本，所以兼容性强，可以用所有的文本编辑器打开</li>
+<li>然你更专注于文字而不是排版</li>
+<li>格式转换方便，Markdown的文本可以很轻松地转换为html语言</li>
+<li>Markdown标记语法有极强的可读性</li>
+</ul>
+<p>本博客所使用的Hexo（博客搭建软件）默认采用的就是Markdown语言作为博文编辑语言，博主编辑好内容后就可以通过Hexo将博文发布到博客网站上。<br><a id="more"></a></p>
+<h2 id="2-Markdown基本语法"><a href="#2-Markdown基本语法" class="headerlink" title="2. Markdown基本语法 "></a>2. Markdown基本语法 <span id="2"></span></h2><p>Markdown标记语言的语法非常简单，只需要多使用就会熟能生巧，作为初学者也可以点击<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">这个网站</a>在线学习编辑Markdown文档，在这个网站中左边是Markdown语言编辑的文本，右边则实时解析出对应的网页页面，十分方便。</p>
+<h3 id="2-1-标题"><a href="#2-1-标题" class="headerlink" title="2.1 标题 "></a>2.1 标题 <span id="2.1"></span></h3><p>Markdown支持两种标题的语法，类Setext和类atxs形式。<br>类Setext形式是用底线的形式，利用=（最高阶标题）和-（第二阶标题），例如:</p>
+<blockquote>
+<p>This is an Head 1<br>\================<br>This is an Head 2<br>-—————</p>
+<p>实际效果</p>
+<h1 id="This-is-an-Head-1"><a href="#This-is-an-Head-1" class="headerlink" title="This is an Head 1"></a>This is an Head 1</h1><h2 id="This-is-an-Head-2"><a href="#This-is-an-Head-2" class="headerlink" title="This is an Head 2"></a>This is an Head 2</h2></blockquote>
+<p>任何数量的 = 和 - 都可以有效果。</p>
+<p>类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如:</p>
+<blockquote>
+<p>#这是H1<br>##这是H2<br>###这是H3<br>####这是H4<br>#####这是H5<br>######这是H6</p>
+<p>显示效果</p>
+<p>#这是H1</p>
+<p>##这是H2</p>
+<p>###这是H3</p>
+<p>####这是H4</p>
+<p>#####这是H5</p>
+<p>######这是H6</p>
+</blockquote>
+<h3 id="2-2-列表"><a href="#2-2-列表" class="headerlink" title="2.2 列表 "></a>2.2 列表 <span id="2.2"></span></h3><p>Markdown支持有序列表和无序列表。<br>无序列表可以使用加号“+”、“-”或者“*”来作为列表标记:</p>
+<blockquote>
+<p>* Red<br>* Green<br>* Blue</p>
+</blockquote>
+<p>等同于:</p>
+<blockquote>
+<p>+ Red<br>+ Green<br>+ Blue</p>
+</blockquote>
+<p>也等同于:</p>
+<blockquote>
+<p>- Red<br>- Green<br>- Blue</p>
+</blockquote>
+<p>上面三种无序列表的显示效果为:</p>
+<blockquote>
+<ul>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ul>
+</blockquote>
+<p>有序列表则使用数字接着一个英文句点:</p>
+<blockquote>
+<ol>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ol>
+<p>显示效果就如上所示</p>
+</blockquote>
+<h3 id="2-3-链接"><a href="#2-3-链接" class="headerlink" title="2.3 链接 "></a>2.3 链接 <span id="2.3"></span></h3><p>Markdown支持两种方式的链接语法: 行内式和参考式。<br>不管是行内式还是参考式，链接文字都是用[方括号]进行标记。<br>要建立一个<strong>行内式</strong>的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，例如:</p>
+<blockquote>
+<p>This is a link of baidu website [baidu](www.baidu.com)</p>
+<p>显示效果</p>
+</blockquote>
+<p>This is a link of baidu website <a href="http://www.baidu.com" target="_blank" rel="external">baidu</a></p>
+<p><strong>参考式</strong>的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记，例如:</p>
+<blockquote>
+<p>This is an [example][id] reference-style link.</p>
+<p>在定义了id之后，需要在文中的末尾定义id对应的链接，例如:<br>[id]: www.baidu.com</p>
+<p>显示效果</p>
+</blockquote>
+<p>This is an <a href="http://www.baidu.com" target="_blank" rel="external">example</a> reference-style link.</p>
+<h3 id="2-4-图片"><a href="#2-4-图片" class="headerlink" title="2.4 图片 "></a>2.4 图片 <span id="2.4"></span></h3><p>Markdown使用一种和链接很相似的语法来标记图片，同样也允许两种样式: 行内式和参考式。<br><strong>行内式</strong>格式的图片语法如下所示:</p>
+<blockquote>
+<p>![AltText](url/of/image)</p>
+</blockquote>
+<p>详细的叙述如下:</p>
+<ul>
+<li>一个惊叹号“！”</li>
+<li>接着一个方括号，里面放上图片的替代文字</li>
+<li>接着一个普通的括号，里面放上图片的网址</li>
+</ul>
+<p><strong>参考式</strong>的图片语法，则如下所示:</p>
+<blockquote>
+<p>![AltText][id]</p>
+</blockquote>
+<p>「id」是图片参考的名称，图片参考的定义方式和参考式链接中的id定义方式类似，如下所示:</p>
+<blockquote>
+<p><a href="http://www.baidu.com" target="_blank" rel="external">id</a>: url/to/image</p>
+</blockquote>
+<h3 id="2-5-代码块"><a href="#2-5-代码块" class="headerlink" title="2.5 代码块 "></a>2.5 代码块 <span id="2.5"></span></h3><p>Markdown中用标记符号“<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;\```java</span><br><span class="line">&gt;import java.lang.*</span><br><span class="line">&gt;</span><br><span class="line">&gt;void main()</span><br><span class="line">&gt;&#123;</span><br><span class="line">&gt;	printlf(&quot;Hello World&quot;);</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>显示效果</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.*</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	printlf(<span class="string">"Hello World"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-引用"><a href="#2-6-引用" class="headerlink" title="2.6 引用 "></a>2.6 引用 <span id="2.6"></span></h3><p>Markdown引用是使用类似email中用“&gt;”的引用方式，具体的使用方法就是在引用的段落的开头加上引用的标记符号“&gt;”，例如:</p>
+<blockquote>
+<p>>这句话就是引用的！</p>
+<p>显示效果</p>
+<p>这句话就是引用的！</p>
+</blockquote>
+<p>并且，在引用的区块内同样可以使用Markdown中的其他语法，例如标题、列表、代码区块等</p>
+<h3 id="2-7-粗体和斜体"><a href="#2-7-粗体和斜体" class="headerlink" title="2.7 粗体和斜体 "></a>2.7 粗体和斜体 <span id="2.7"></span></h3><p>Markdown使用“*”或者“_”作为标记强调字词的符号，被“*”或者“_”包围的字词会解析为表示强调的粗体和斜体。<br>其中，用一个“*”包围的字词表示斜体</p>
+<blockquote>
+<p>*你好*</p>
+<p>显示效果</p>
+<p><em>你好</em></p>
+</blockquote>
+<p>用两个“*”包围的字词表示粗体</p>
+<blockquote>
+<p>**你好**</p>
+<p>显示效果</p>
+<p><strong>你好</strong></p>
+</blockquote>
+<h3 id="2-8-表格"><a href="#2-8-表格" class="headerlink" title="2.8 表格 "></a>2.8 表格 <span id="2.8"></span></h3><p>Markdown中用“|”、“-”和“:”标记符号来构造表格，例如:</p>
+<blockquote>
+<p>|    Tables    |      Are      |     Cool    |<br>|————–|:————-:|————:|<br>|    col 3 is  | right-aligned |       $1600 |<br>|    col 2 is  |    centered   |          $12|<br>|     hello    |    how much   |           $5|</p>
+<p>显示效果</p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>hello</td>
+<td style="text-align:center">how much</td>
+<td style="text-align:right">$5</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p><strong>总结</strong>:</p>
+<ol>
+<li>第二行是设定对应列的对齐方式</li>
+<li>通过在标记符号”|”之间设置“:”的位置来实现对齐方式</li>
+<li>如果标记符号为“|:—–:|”，则表示居中对齐</li>
+<li>如果标记符号为“|——:|”，则表示右对齐</li>
+<li>如果标记符号为”|:——|”，则表示左对齐</li>
+<li>如果标记符号为“|——-|”，则表示的是默认对齐方式，默认的对齐方式是左对齐</li>
+</ol>
+<h3 id="2-9-分隔符"><a href="#2-9-分隔符" class="headerlink" title="2.9 分隔符 "></a>2.9 分隔符 <span id="2.9"></span></h3><p>Markdown中使用三个以上的”*”、“-”和“_”来建立一个分隔符，例如:</p>
+<blockquote>
+<p>***</p>
+<hr>
+<h2 id=""><a href="#" class="headerlink" title="---"></a>---</h2><p>___</p>
+<hr>
+</blockquote>
+<h3 id="2-10-特殊字符插入"><a href="#2-10-特殊字符插入" class="headerlink" title="2.10 特殊字符插入 "></a>2.10 特殊字符插入 <span id="2.10"></span></h3><p>Markdown中可以通过反斜杠”\”来插入一些在语法中有其他意义的符号。<br>Markdown支持以下这些符号前面加上反斜杠来帮助插入普通的符号:</p>
+<blockquote>
+<p>\    反斜杠<br>`    反引号<br>*    星号<br>_    底线<br>{}   花括号<br>()   括弧<br>#    井字号<br>+    加号<br>-    减号<br>.    英文句号<br>!    惊叹号</p>
+</blockquote>
+<h2 id="3-Markdown中实现页内跳转"><a href="#3-Markdown中实现页内跳转" class="headerlink" title="3. Markdown中实现页内跳转 "></a>3. Markdown中实现页内跳转 <span id="3"></span></h2><p>在写一篇很长的文章时，如果没有一个目录，不仅写作者有时头绪会很乱，而且读者在读整篇文章时也会很困难，因此有一个可以跳转目录就会变得很方便。<br>由于Markdown标记语言是兼容html语言的，所以在这里可以使用html中的锚来实现页内跳转。<br>实现方式:</p>
+<ol>
+<li>在需要进行跳转的地方用Markdown语言设置跳转的标签:<a href="#1">点击跳转</a></li>
+<li>在跳转到的地方设置一个锚:&lt; span id=”1”&gt;&lt;/ span&gt;（注意: 这里为了能显示html的标签，因此在&lt; 和span之间加了一个空格，在实际应用时则需要把这个空格去除）。</li>
+</ol>
+<h2 id="4-Markdown编辑器推荐"><a href="#4-Markdown编辑器推荐" class="headerlink" title="4. Markdown编辑器推荐 "></a>4. Markdown编辑器推荐 <span id="4"></span></h2><p>Linux 平台:</p>
+<ul>
+<li><a href="http://pad.haroopress.com" target="_blank" rel="external">haroopad</a></li>
+</ul>
+<p>Windows平台:</p>
+<ul>
+<li><a href="http://code52.org/DownmarkerWPF" target="_blank" rel="external">Markpad</a></li>
+</ul>
+<p>在线Markdown编辑网站:</p>
+<ul>
+<li><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">Cmd Markdown</a></li>
+</ul>
+<h2 id="5-Markdown使用小技巧"><a href="#5-Markdown使用小技巧" class="headerlink" title="5. Markdown使用小技巧 "></a>5. Markdown使用小技巧 <span id="5"></span></h2><ol>
+<li><p>在Markdown中输入空格字符。<br>在Markdown中默认对文本中的空格字符是忽略的，但是有时我们为了达到缩进美观的要求时，我们可以通过输入</p>
+<blockquote>
+<p>&amp; emsp;</p>
+</blockquote>
+<p> 来实现空格字符的输入。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Markdown/" rel="tag">#Markdown</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/18/Android虚拟激光键盘设计及实现/" rel="next" title="Android虚拟激光键盘设计及实现">
+                <i class="fa fa-chevron-left"></i> Android虚拟激光键盘设计及实现
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/12/学习英语的建议/" rel="prev" title="[转载]英语学习的一些建议">
+                [转载]英语学习的一些建议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/12/Markdown简易教程/"
+           data-title="Markdown简易教程" data-url="http://woshijpf.github.io/2015/07/12/Markdown简易教程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xj51c.com1.z0.glb.clouddn.com/%E5%A4%9A%E6%9D%A5A%E6%A2%A62.png"
+               alt="woshijpf" />
+          <p class="site-author-name" itemprop="name">woshijpf</p>
+          <p class="site-description motion-element" itemprop="description">Talk is cheap show me the code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/woshijpf" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/jiang-peng-fei-24" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/56692971/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2434965031/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Markdown简介"><span class="nav-number">1.</span> <span class="nav-text">1. Markdown简介 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Markdown基本语法"><span class="nav-number">2.</span> <span class="nav-text">2. Markdown基本语法 </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-标题"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 标题 </span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#This-is-an-Head-1"><span class="nav-number"></span> <span class="nav-text">This is an Head 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-an-Head-2"><span class="nav-number">1.</span> <span class="nav-text">This is an Head 2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-列表"><span class="nav-number">1.1.</span> <span class="nav-text">2.2 列表 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-链接"><span class="nav-number">1.2.</span> <span class="nav-text">2.3 链接 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-图片"><span class="nav-number">1.3.</span> <span class="nav-text">2.4 图片 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-代码块"><span class="nav-number">1.4.</span> <span class="nav-text">2.5 代码块 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-引用"><span class="nav-number">1.5.</span> <span class="nav-text">2.6 引用 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-粗体和斜体"><span class="nav-number">1.6.</span> <span class="nav-text">2.7 粗体和斜体 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-表格"><span class="nav-number">1.7.</span> <span class="nav-text">2.8 表格 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-分隔符"><span class="nav-number">1.8.</span> <span class="nav-text">2.9 分隔符 </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">---</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-10-特殊字符插入"><span class="nav-number">2.1.</span> <span class="nav-text">2.10 特殊字符插入 </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Markdown中实现页内跳转"><span class="nav-number">3.</span> <span class="nav-text">3. Markdown中实现页内跳转 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Markdown编辑器推荐"><span class="nav-number">4.</span> <span class="nav-text">4. Markdown编辑器推荐 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Markdown使用小技巧"><span class="nav-number">5.</span> <span class="nav-text">5. Markdown使用小技巧 </span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">woshijpf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"woshijpf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
